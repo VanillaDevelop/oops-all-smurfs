@@ -1,0 +1,55 @@
+:root {
+  font-family: sans-serif;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 3em;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  color: inherit;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.5s;
+}
+
+button:hover {
+  border-color: white;
+}
+
+input, label {
+  display: block;
+  margin-bottom: 0.5em;
+}
+
+input {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  color: inherit;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  transition: border-color 0.5s;
+}
+
+input:focus {
+  outline: none;
+  border-color: white;
+}
