@@ -1,33 +1,15 @@
-import './App.scss';
-import React, {useState} from "react";
-import {LolApi, Constants} from "twisted";
-import {ipcRenderer} from "electron";
+import React from "react";
+import {Route, Routes} from "react-router-dom";
+import KeyPage from "@/pages/KeyPage";
+import HomePage from "@/pages/HomePage";
 
-function App() {
-    const [apiKey, setApiKey] = useState<string>("");
-
-    function changeApiKey(key: string)
-    {
-        setApiKey(key);
-    }
-
-    function checkApiKey()
-    {
-        const summoner = ipcRenderer.invoke('testApi', apiKey, "Vanilla Nya").then((res) => {
-            console.log(res);
-        })
-    }
-
+function App()
+{
     return (
-        <div className='App'>
-            <h1>Oops, all smurfs!</h1>
-            <h2>Explore the epic depths of League of Legends' smurf queue.</h2>
-            <div className='api-key-form'>
-                <label htmlFor='api-key'>To begin, enter a valid Riot Games API key below.</label>
-                <input type='text' id='api-key' value={apiKey} onChange={(e) => setApiKey(e.target.value)}/>
-                <button onClick={checkApiKey}>Submit</button>
-            </div>
-        </div>
+        <Routes>
+            <Route path="/" element={<KeyPage />} />
+            <Route path="/home" element={<HomePage />} />
+        </Routes>
     )
 }
 

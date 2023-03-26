@@ -4,12 +4,10 @@
   background-color: #242424;
 }
 
-body {
+body, html, #root {
+  width: 100%;
+  height: 100%;
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
 }
 
 h1 {
@@ -33,7 +31,7 @@ button:hover {
   border-color: white;
 }
 
-input, label {
+input, label, select {
   display: block;
   margin-bottom: 0.5em;
 }
@@ -52,4 +50,37 @@ input {
 input:focus {
   outline: none;
   border-color: white;
+}
+
+select {
+    border-radius: 8px;
+    border: 1px solid transparent;
+    padding: 0.6em 1.2em;
+    font-size: 1em;
+    color: inherit;
+    font-family: inherit;
+    background-color: #1a1a1a;
+    transition: border-color 0.5s;
+    width: 340px;
+}
+
+select:focus {
+    outline: none;
+    border-color: white;
+}
+
+.warning
+{
+  width: 300px;
+  background-color: #ff454540;
+  border-radius: 8px;
+  border: 1px solid #940000;
+  padding: 1em;
+}
+
+.fullScreen {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
 }

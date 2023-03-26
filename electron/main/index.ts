@@ -3,6 +3,7 @@ import { release } from 'node:os'
 import { join } from 'node:path'
 import { update } from './update'
 import {Constants, LolApi} from "twisted";
+import {getSummoner, setApiKey, testApiKey} from "../electron_utils/apiCalls";
 
 // The built directory structure
 //
@@ -122,7 +123,5 @@ ipcMain.handle('open-win', (_, arg) => {
 
 let LeagueApi : LolApi
 
-ipcMain.handle('testApi', async (event, ...args) => {
-    LeagueApi = new LolApi(args[0])
-    return await LeagueApi.Summoner.getByName(args[1], Constants.Regions.EU_WEST)
-})
+ipcMain.handle('setApiKey', setApiKey)
+ipcMain.handle('testApiKey', testApiKey)
