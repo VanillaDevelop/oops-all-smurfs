@@ -2,8 +2,7 @@ import { app, BrowserWindow, shell, ipcMain } from 'electron'
 import { release } from 'node:os'
 import { join } from 'node:path'
 import { update } from './update'
-import {Constants, LolApi} from "twisted";
-import {getSummoner, setApiKey, testApiKey} from "../electron_utils/apiCalls";
+import {getSummoner, setApiKey, testApiKey, getSummonersPlayedWith} from "../electron_utils/apiCalls";
 
 // The built directory structure
 //
@@ -121,7 +120,7 @@ ipcMain.handle('open-win', (_, arg) => {
   }
 })
 
-let LeagueApi : LolApi
-
 ipcMain.handle('setApiKey', setApiKey)
 ipcMain.handle('testApiKey', testApiKey)
+ipcMain.handle('getSummoner', getSummoner)
+ipcMain.handle('getSummonersPlayedWith', getSummonersPlayedWith)

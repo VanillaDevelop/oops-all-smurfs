@@ -1,12 +1,19 @@
 import React, {createContext} from 'react';
+import {IAppContext} from "@/Interfaces";
 
-const AppContext = createContext({})
+const AppContext = createContext<IAppContext>({} as IAppContext);
 
-function AppContextProvider(children: React.ReactNode)
+function AppContextProvider(props: { children: React.ReactElement })
 {
+    const [summoner, setSummoner] = React.useState({});
+
+
+
     return (
-        <AppContext.Provider value={{}}>
-            {children}
+        <AppContext.Provider value={{
+            setSummoner
+        }}>
+            {props.children}
         </AppContext.Provider>
     )
 }
