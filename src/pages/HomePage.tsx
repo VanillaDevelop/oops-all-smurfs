@@ -14,7 +14,7 @@ export default function HomePage()
     const [warningText, setWarningText] = useState<string>("");
     const [loading, setLoading] = useState<number[]>([0,0,0]);
 
-    const {setSummoner} = useContext(AppContext);
+    const {setSummoner, setMatches} = useContext(AppContext);
     const navigate = useNavigate();
 
     //no clue what kind of type hallucinations are going on here soooo...
@@ -48,10 +48,8 @@ export default function HomePage()
         if (matchDetails.length === 0)
             return setWarningText("Could not find any match details. Try again later.");
 
-        //const played_with = await ipcRenderer.invoke('getSummonersPlayedWith', summoner.puuid, region)
-
-        //console.log(played_with)
-        //navigate('/select_summoners')
+        setMatches(matchDetails)
+        navigate('/select-summoners')
     }
 
     return (
