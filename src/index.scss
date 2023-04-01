@@ -25,10 +25,9 @@ button {
   background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.5s;
-}
-
-button:hover {
-  border-color: white;
+  &:hover {
+    border-color: white;
+  }
 }
 
 input, label, select {
@@ -45,11 +44,10 @@ input {
   font-family: inherit;
   background-color: #1a1a1a;
   transition: border-color 0.5s;
-}
-
-input:focus {
-  outline: none;
-  border-color: white;
+  &:focus {
+    outline: none;
+    border-color: white;
+  }
 }
 
 select {
@@ -62,20 +60,10 @@ select {
     background-color: #1a1a1a;
     transition: border-color 0.5s;
     width: 340px;
-}
-
-select:focus {
-    outline: none;
-    border-color: white;
-}
-
-.warning
-{
-  width: 300px;
-  background-color: #ff454540;
-  border-radius: 8px;
-  border: 1px solid #940000;
-  padding: 1em;
+    &:focus {
+        outline: none;
+        border-color: white;
+    }
 }
 
 .fullScreen {
@@ -94,22 +82,4 @@ select:focus {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-}
-
-.loading-bar-container {
-  display: flex;
-  justify-content: left;
-  align-items: center;
-  height: 20px;
-  margin: 10px;
-  width: 335px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-.loading-bar {
-  height: 100%;
-  background-color: #007bff;
-  border-radius: 5px;
-  transition: width 0.3s ease-in-out;
 }

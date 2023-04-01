@@ -11,5 +11,7 @@ export interface IAppContext {
 export interface ISuspiciousSummoner {
     summoner: MatchV5DTOs.ParticipantDto,
     matchId: number,
-    flagged: boolean
+    flagged: boolean,
+    ally: boolean,
+    won: boolean
 }

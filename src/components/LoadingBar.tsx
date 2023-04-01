@@ -1,4 +1,5 @@
 import React from 'react';
+import './LoadingBar.scss';
 
 export default function LoadingBar({ min, current, max} : {min: number; current: number; max: number;})
 {
