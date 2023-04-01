@@ -1,0 +1,39 @@
+.profile {
+  min-height: 100px;
+  display: flex;
+  flex-direction: column;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.playerInfo {
+  margin-top: 10px;
+  min-width: 300px;
+  height: 100%;
+  border-radius: 5px;
+  padding: 10px;
+  position: relative;
+}
+
+.enemy {
+  background-color: #3b0500;
+  border: 2px solid #360500;
+}
+
+.ally {
+  background-color: #003604;
+  border: 2px solid #003600;
+}
+
+.profileType {
+  margin-left: 5px;
+}
+
+.smurfMark {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}

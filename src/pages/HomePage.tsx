@@ -17,7 +17,7 @@ export default function HomePage()
     const {setSummoner, setMatches} = useContext(AppContext);
     const navigate = useNavigate();
 
-    //no clue what kind of type hallucinations are going on here soooo...
+    //no clue what kind of type hallucinations are going on here...
     // @ts-ignore
     const server_options = (Object.keys(Constants.Regions) as Array<keyof typeof Constants.Regions>).map(
         (key)  => <option key={key} value={key}>{Constants.Regions[key]}</option>)
@@ -53,7 +53,7 @@ export default function HomePage()
     }
 
     return (
-        <div className="container">
+        <div className="container flex-col-center">
             <div className='summonerSearchForm'>
                 <label htmlFor='summonerName'>Summoner Name</label>
                 <Warning text={warningText} />

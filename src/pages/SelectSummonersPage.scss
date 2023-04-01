@@ -1,11 +1,4 @@
 .matchDisplay {
-  max-width: 1280px;
-  min-height: 100%;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   padding-bottom: 3em;
 }
 
@@ -15,45 +8,9 @@
   grid-auto-rows: minmax(auto, max-content);
   grid-gap: 1rem;
   width: 100%;
-  grid-auto-flow: dense;
 }
 
-.profile {
-  min-height: 100px;
-  display: flex;
-  flex-direction: column;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-.playerInfo {
-  margin-top: 10px;
-  min-width: 300px;
-  height: 100%;
-  border-radius: 5px;
-  padding: 10px;
-  position: relative;
-}
-
-.enemy {
-  background-color: #3b0500;
-  border: 2px solid #360500;
-}
-
-.ally {
-    background-color: #003604;
-    border: 2px solid #003600;
-}
-
-.profileType {
-    margin-left: 5px;
-}
-
-.smurfMark {
-  position: absolute;
-  top: 5px;
-  right: 5px;
+.infoParagraph {
+  width: 70%;
+  text-align:center;
 }

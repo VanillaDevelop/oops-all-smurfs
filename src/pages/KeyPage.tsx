@@ -24,7 +24,7 @@ function KeyPage()
     }
 
     return (
-        <div className="container">
+        <div className="container text-center flex-col-center">
             <h1>Oops, all smurfs!</h1>
             <h2>Explore the epic depths of League of Legends' smurf queue.</h2>
             <div className='api-key-form'>

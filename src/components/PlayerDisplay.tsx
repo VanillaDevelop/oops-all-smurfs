@@ -4,6 +4,7 @@ import {faStar as faStarEmpty} from "@fortawesome/free-regular-svg-icons";
 import {faStar} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {ISuspiciousSummoner} from "@/Interfaces";
+import "./PlayerDisplay.scss"
 
 
 export default function PlayerDisplay(props: {player: ISuspiciousSummoner, match: MatchV5DTOs.MatchDto})

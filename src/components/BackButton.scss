@@ -1,9 +1,10 @@
 .backButton {
-    position: fixed;
-    bottom: 5%;
+    position: absolute;
+    top: 5%;
     left: 5%;
-    width: 75px;
-    height: 75px;
+    width: 5vw;
+    height: 5vw;
+    font-size: 2vw;
     background: #ffffff;
     border: 2px solid #ccc;
     border-radius: 50%;
@@ -12,7 +13,6 @@
     align-items: center;
     cursor: pointer;
     color: black;
-    font-size: 1.9em;
     transition: all 0.3s ease-in-out;
     &:hover {
         background: #ccc;

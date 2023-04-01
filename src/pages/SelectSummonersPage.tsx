@@ -4,11 +4,13 @@ import PlayerDisplay from "@/components/PlayerDisplay";
 import "./SelectSummonersPage.scss"
 import {ISuspiciousSummoner} from "@/Interfaces";
 import BackButton from "@/components/BackButton";
+import {useNavigate} from "react-router-dom";
 
 export default function SelectSummonersPage()
 {
     const {summoner, matches} = useContext(AppContext);
     const [suspiciousSummoners, setSuspiciousSummoners] = React.useState([] as ISuspiciousSummoner[])
+    const navigate = useNavigate();
 
     //One-time setup of suspicious summoners from props
     useEffect(() => {
@@ -50,16 +52,16 @@ export default function SelectSummonersPage()
 
     return (
         <div>
-            <div className="matchDisplay">
+            <div className="matchDisplay container flex-col-center">
                 <h1>Smurf Check</h1>
-                <p>Oopsie! In your last {matches.length} matches, there were <strong>{suspiciousSummoners.length} potential
-                    smurfs</strong> (accounts below summoner level 50)! <br />
-                    Want to learn more? Click on any of the accounts below to learn more about them (surely only good things).</p>
+                <p className="infoParagraph">Oopsie! In your last {matches.length} matches, there were <strong>{suspiciousSummoners.length} potential
+                    smurfs</strong> (accounts below summoner level 50)! Want to learn more?
+                    Click on any of the accounts below to learn more about them (surely only good things).</p>
                 <div>
                     {matchElems}
                 </div>
             </div>
-            <BackButton />
+            <BackButton onClick={() => navigate("/home")}/>
         </div>
     )
 }
