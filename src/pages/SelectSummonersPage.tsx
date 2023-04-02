@@ -8,8 +8,7 @@ import {useNavigate} from "react-router-dom";
 
 export default function SelectSummonersPage()
 {
-    const {summoner, matches} = useContext(AppContext);
-    const [suspiciousSummoners, setSuspiciousSummoners] = React.useState([] as ISuspiciousSummoner[])
+    const {summoner, matches, suspiciousSummoners, setSuspiciousSummoners} = useContext(AppContext);
     const navigate = useNavigate();
 
     //One-time setup of suspicious summoners from props

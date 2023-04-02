@@ -16,6 +16,10 @@
   border-radius: 5px;
   padding: 10px;
   position: relative;
+  transition: border 0.2s ease-in-out;
+  &:hover {
+    border: 2px solid #fff;
+  }
 }
 
 .enemy {

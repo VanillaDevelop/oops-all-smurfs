@@ -31,7 +31,7 @@ export default function HomePage()
             return setWarningText("Could not find this summoner. Double-check the name and region.");
         setSummoner(summoner);
 
-        const matches = await ipcRenderer.invoke('getSummonerMatches', summoner.puuid, region)
+        const matches = await ipcRenderer.invoke('getSummonerMatches', summoner.puuid)
         if (!matches)
             return setWarningText("Could not find any matches for this summoner. Try again later.");
 
@@ -39,7 +39,7 @@ export default function HomePage()
 
         const matchDetails = []
         for (let i = 0; i < matches.length; i++) {
-            const match = await ipcRenderer.invoke('getSummonerMatchDetails', matches[i], region)
+            const match = await ipcRenderer.invoke('getSummonerMatchDetails', matches[i])
             if (match !== null)
                 matchDetails.push(match)
             setLoading([0, i, matches.length])

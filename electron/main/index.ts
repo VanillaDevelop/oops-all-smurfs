@@ -2,7 +2,7 @@ import { app, BrowserWindow, shell, ipcMain } from 'electron'
 import { release } from 'node:os'
 import { join } from 'node:path'
 import { update } from './update'
-import {getSummoner, setApiKey, testApiKey, getSummonersPlayedWith, getSummonerMatches, getSummonerMatchDetails} from "../electron_utils/apiCalls";
+import {getSummoner, setApiKey, testApiKey, getSummonerMatches, getSummonerMatchDetails} from "../electron_utils/apiCalls";
 
 // The built directory structure
 //
@@ -125,6 +125,5 @@ ipcMain.handle('open-win', (_, arg) => {
 ipcMain.handle('setApiKey', setApiKey)
 ipcMain.handle('testApiKey', testApiKey)
 ipcMain.handle('getSummoner', getSummoner)
-ipcMain.handle('getSummonersPlayedWith', getSummonersPlayedWith)
 ipcMain.handle('getSummonerMatches', getSummonerMatches)
 ipcMain.handle('getSummonerMatchDetails', getSummonerMatchDetails)

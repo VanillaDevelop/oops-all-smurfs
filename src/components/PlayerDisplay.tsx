@@ -1,28 +1,25 @@
 import React from "react"
 import {MatchV5DTOs} from "twisted/dist/models-dto";
-import {faStar as faStarEmpty} from "@fortawesome/free-regular-svg-icons";
 import {faStar} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {ISuspiciousSummoner} from "@/Interfaces";
 import "./PlayerDisplay.scss"
+import {useNavigate} from "react-router-dom";
 
 
 export default function PlayerDisplay(props: {player: ISuspiciousSummoner, match: MatchV5DTOs.MatchDto})
 {
-
-    const [isHovered, setIsHovered] = React.useState(false);
-
     const player_role = props.player.summoner.individualPosition[0]
         + props.player.summoner.individualPosition.substring(1, props.player.summoner.individualPosition.length).toLowerCase()
+
+    const navigate = useNavigate()
 
     return (
         <div className={`profile`}>
             <span className="profileType"> {props.player.ally ? "Ally" : "Enemy"} - {props.player.won ? "Won" : "Lost"} </span>
-            <div className={`playerInfo  ${props.player.ally ? "ally" : "enemy"}`}
-                onMouseEnter={() => setIsHovered(true)}
-                onMouseLeave={() => setIsHovered(false)}>
+            <div className={`playerInfo  ${props.player.ally ? "ally" : "enemy"}`} onClick={() => navigate("/load-summoner/" + props.player.summoner.puuid)}>
                 <div className="smurfMark">
-                    {(props.player.flagged || isHovered) && <FontAwesomeIcon icon={props.player.flagged ? faStar : faStarEmpty} />}
+                    {(props.player.data) && <FontAwesomeIcon icon={faStar} />}
                 </div>
                 <strong>{props.player.summoner.summonerName}</strong> (Level {props.player.summoner.summonerLevel}) <br />
                 {props.player.summoner.championName} {player_role} <br />
