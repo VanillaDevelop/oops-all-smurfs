@@ -1,6 +1,6 @@
 import React from "react"
 import {MatchV5DTOs} from "twisted/dist/models-dto";
-import {faStar} from "@fortawesome/free-solid-svg-icons";
+import {faFile} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {ISuspiciousSummoner} from "@/Interfaces";
 import "./PlayerDisplay.scss"
@@ -14,12 +14,18 @@ export default function PlayerDisplay(props: {player: ISuspiciousSummoner, match
 
     const navigate = useNavigate()
 
+    function navigateToUser()
+    {
+        if(!props.player.data) navigate("/load-summoner/" + props.player.summoner.puuid)
+        else navigate("/summoner-details/" + props.player.summoner.puuid)
+    }
+
     return (
         <div className={`profile`}>
             <span className="profileType"> {props.player.ally ? "Ally" : "Enemy"} - {props.player.won ? "Won" : "Lost"} </span>
-            <div className={`playerInfo  ${props.player.ally ? "ally" : "enemy"}`} onClick={() => navigate("/load-summoner/" + props.player.summoner.puuid)}>
+            <div className={`playerInfo  ${props.player.ally ? "ally" : "enemy"}`} onClick={navigateToUser}>
                 <div className="smurfMark">
-                    {(props.player.data) && <FontAwesomeIcon icon={faStar} />}
+                    {(props.player.data) && <FontAwesomeIcon icon={faFile} />}
                 </div>
                 <strong>{props.player.summoner.summonerName}</strong> (Level {props.player.summoner.summonerLevel}) <br />
                 {props.player.summoner.championName} {player_role} <br />

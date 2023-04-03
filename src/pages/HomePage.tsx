@@ -6,6 +6,8 @@ import {useNavigate} from "react-router-dom";
 import Warning from "@/components/Warning";
 import LoadingBar from "@/components/LoadingBar";
 import "./HomePage.scss"
+import {ISuspiciousSummoner} from "@/Interfaces";
+import {MatchV5DTOs} from "twisted/dist/models-dto";
 
 export default function HomePage()
 {
@@ -14,7 +16,7 @@ export default function HomePage()
     const [warningText, setWarningText] = useState<string>("");
     const [loading, setLoading] = useState<number[]>([0,0,0]);
 
-    const {setSummoner, setMatches} = useContext(AppContext);
+    const {setSummoner, setMatches, setSuspiciousSummoners} = useContext(AppContext);
     const navigate = useNavigate();
 
     //no clue what kind of type hallucinations are going on here...
@@ -49,6 +51,21 @@ export default function HomePage()
             return setWarningText("Could not find any match details. Try again later.");
 
         setMatches(matchDetails)
+
+        const suspicious = matchDetails.map(match => {
+            return match.info.participants.map((participant: MatchV5DTOs.ParticipantDto) => {
+                if (participant.summonerLevel >= 50 || participant.summonerLevel < 30) return null;
+                const user_team = match.info.participants.find((participant: MatchV5DTOs.ParticipantDto) => participant.summonerName === summoner.name);
+                return {
+                    matchId: match.info.gameId,
+                    summoner: participant,
+                    flagged: false,
+                    ally: participant.teamId === user_team?.teamId,
+                    won: participant.teamId === user_team?.teamId ? user_team?.win : !user_team?.win}
+            }).filter((x: MatchV5DTOs.MatchDto) => x !== null)
+        }).flat() as ISuspiciousSummoner[]
+        setSuspiciousSummoners(suspicious)
+
         navigate('/select-summoners')
     }
 

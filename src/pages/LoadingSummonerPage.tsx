@@ -9,9 +9,11 @@ export default function LoadingSummonerPage()
 {
     const [loading, setLoading] = useState<number[]>([0,0,0]);
     const navigate = useNavigate();
-    const {setSuspiciousSummoners} = useContext(AppContext);
+    const {suspiciousSummoners, setSuspiciousSummoners} = useContext(AppContext);
 
     const { puuid } = useParams<{puuid: string}>();
+
+    const summoner = suspiciousSummoners.find(s => s.summoner.puuid === puuid)
 
     useEffect(() => {
         async function getPlayerMatches() {
@@ -42,8 +44,8 @@ export default function LoadingSummonerPage()
     }, [])
 
     return (
-        <div>
-            <h1>Loading Matches...</h1>
+        <div className="container flex-col-center">
+            <h2>Loading Matches for {summoner?.summoner.summonerName}...</h2>
             {loading[1] !== loading[2] && <LoadingBar min={loading[0]} current={loading[1]} max={loading[2]}/>}
         </div>
     )
