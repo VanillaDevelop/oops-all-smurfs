@@ -19,3 +19,8 @@ export interface ISuspiciousSummoner {
     ally: boolean,
     won: boolean
 }
+
+export interface ISmurfIndicator {
+    smurf: boolean,
+    text: string
+}
