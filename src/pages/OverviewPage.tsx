@@ -5,7 +5,7 @@ import "./SelectSummonersPage.scss"
 import BackButton from "@/components/BackButton";
 import {useNavigate} from "react-router-dom";
 
-export default function SelectSummonersPage()
+export default function OverviewPage()
 {
     const {matches, suspiciousSummoners, summoner} = useContext(AppContext);
     const navigate = useNavigate();
