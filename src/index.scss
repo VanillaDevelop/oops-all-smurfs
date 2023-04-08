@@ -91,3 +91,18 @@ select {
   grid-gap: 1rem;
   width: 100%;
 }
+
+.statsEntry {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-inline: 30px;
+}
+
+.statsBox {
+  width: 400px;
+  margin: 0 auto;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+}

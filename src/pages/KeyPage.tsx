@@ -16,7 +16,7 @@ export default function KeyPage()
         await ipcRenderer.invoke('setApiKey', apiKey);
         if(await ipcRenderer.invoke('testApiKey') == true)
         {
-            navigate('/home')
+            navigate('/enter-summoner-data')
         }
         else
         {

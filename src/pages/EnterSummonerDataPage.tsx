@@ -5,14 +5,13 @@ import {AppContext} from "@/context/AppContext";
 import {useNavigate} from "react-router-dom";
 import Warning from "@/components/Warning";
 import LoadingBar from "@/components/LoadingBar";
-import "./EnterSummonerDataPage.scss"
 import {ISuspiciousSummoner} from "@/Interfaces";
 import {MatchV5DTOs} from "twisted/dist/models-dto";
 
 export default function EnterSummonerDataPage()
 {
     const [username, setUsername] = useState<string>("");
-    const [region, setRegion] = useState<string>("na1");
+    const [region, setRegion] = useState<string>("EU_WEST");
     const [warningText, setWarningText] = useState<string>("");
     const [loading, setLoading] = useState<number[]>([0,0,0]);
 
@@ -20,7 +19,7 @@ export default function EnterSummonerDataPage()
     const navigate = useNavigate();
 
     const server_options = (Object.keys(Constants.Regions) as Array<keyof typeof Constants.Regions>).map(
-        (key)  => <option key={key} value={key}>{Constants.Regions[key]}</option>)
+        (key)  => <option key={key} value={key}>{key.replace("_", " ")}</option>)
 
     async function checkSummoner() {
         setWarningText("")
@@ -79,7 +78,7 @@ export default function EnterSummonerDataPage()
                 </select>
                 <button onClick={checkSummoner}>Submit</button>
             </div>
-            <div className="loadingContainer">
+            <div>
                 {loading[1] !== loading[2] && <LoadingBar min={loading[0]} current={loading[1]} max={loading[2]}/>}
             </div>
         </div>
