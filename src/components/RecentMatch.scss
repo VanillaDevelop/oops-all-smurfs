@@ -1,5 +1,4 @@
 .recentMatch {
-  background-color: #333;
   width: 300px;
   min-height: 60px;
   border-radius: 5px;
@@ -12,10 +11,14 @@
 }
 
 .matchLoss {
+  background-color: #794646;
+  box-shadow: 0 5px 10px 0 #290000;
   border: 2px solid #290000;
 }
 
 .matchWin {
+    background-color: #3d8a57;
+    box-shadow: 0 5px 10px 0 #002900;
     border: 2px solid #002900;
 }
 
@@ -29,4 +32,5 @@
   -webkit-user-select: none; /* Safari */
   -moz-user-select: none; /* Old versions of Firefox */
   -ms-user-select: none; /* Internet Explorer/Edge */
+  font-family: "Courier New", Courier, monospace;
 }

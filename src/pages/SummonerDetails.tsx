@@ -125,7 +125,7 @@ export default function SummonerDetails()
     smurfChecks.sort((a,b) => a.smurf ? -1 : 1)
 
     //map to components
-    const smurfElems = smurfChecks.map(check => <SmurfIndicator indicator={check} />)
+    const smurfElems = smurfChecks.map(check => <SmurfIndicator indicator={check} key={check.text} />)
 
     return (
         <div>
