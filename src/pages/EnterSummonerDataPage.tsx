@@ -76,7 +76,7 @@ export default function EnterSummonerDataPage()
                 <select id='region' value={region} onChange={(e) => setRegion(e.target.value)}>
                     {server_options}
                 </select>
-                <button onClick={checkSummoner}>Submit</button>
+                <button disabled={loading[0] != loading[2]} onClick={checkSummoner}>Submit</button>
             </div>
             <div>
                 {loading[1] !== loading[2] && <LoadingBar min={loading[0]} current={loading[1]} max={loading[2]}/>}

@@ -1,0 +1,18 @@
+.smurfIndicator {
+  margin: 0.5em 0;
+  display: flex;
+  align-items: center;
+}
+
+.smurfIndicatorIcon {
+  margin-right: 0.5em;
+  font-size: 1.5em;
+}
+
+.smurfIndicatorFalse .smurfIndicatorIcon {
+  color: #4caf50;
+}
+
+.smurfIndicatorTrue .smurfIndicatorIcon {
+  color: #f44336;
+}

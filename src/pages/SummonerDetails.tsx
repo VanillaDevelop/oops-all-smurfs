@@ -2,10 +2,10 @@ import React, {useContext} from "react"
 import {useNavigate, useParams} from "react-router-dom";
 import {AppContext} from "@/context/AppContext";
 import BackButton from "@/components/BackButton";
-import "./SummonerDetails.scss"
 import SmurfIndicator from "@/components/SmurfIndicator";
 import {ISmurfIndicator} from "@/Interfaces";
 import RecentMatch from "@/components/RecentMatch";
+import "./SummonerDetails.scss"
 
 export default function SummonerDetails()
 {
@@ -22,9 +22,18 @@ export default function SummonerDetails()
         "pings_l": 0,
         "pings_w": 0
     }
-    const match_length = suspiciousSummoner?.data?.recentMatches.length ?? 1;
 
-    for (let i = 0; i < (suspiciousSummoner?.data?.recentMatches.length ?? 0); i++) {
+    // match count has to be at least 1 to be navigated to this page.
+    const match_count = suspiciousSummoner!.data!.recentMatches.length;
+
+    //this shouldn't happen in the electron app, but resolves type errors
+    if(!puuid) {
+        navigate("/select-summoners");
+        return;
+    }
+
+    for (let i = 0; i < match_count; i++)
+    {
         const match = suspiciousSummoner?.data?.recentMatches[i];
         const summoner = match?.info.participants.find(p => p.puuid === puuid)
         if (match && summoner) {
@@ -42,11 +51,12 @@ export default function SummonerDetails()
         }
     }
 
-    const recentMatches = suspiciousSummoner?.data?.recentMatches.map(m => <RecentMatch match={m} summoner_id={puuid ?? ""} />)
+    const recentMatches = suspiciousSummoner?.data?.recentMatches.map(
+        m => <RecentMatch match={m} summoner_id={puuid} />)
 
-    const winrate = Math.round(stats.wins/(suspiciousSummoner?.data?.recentMatches.length ?? 1)*100)
-    const pings_per_game = Math.round((stats.pings_w + stats.pings_l)/match_length)
-    const pings_per_loss = Math.round(stats.pings_l/(match_length - stats.wins))
+    const winrate = Math.round(stats.wins/match_count*100)
+    const pings_per_game = Math.round((stats.pings_w + stats.pings_l)/match_count)
+    const pings_per_loss = Math.round(stats.pings_l/(match_count - stats.wins))
 
     const smurfChecks = [] as ISmurfIndicator[]
     //Check if the player has a high/low winrate
@@ -100,8 +110,8 @@ export default function SummonerDetails()
             (p) => p.puuid !== puuid && p.summonerLevel < 50 && p.teamId == m.info.participants.find(px => px.puuid == puuid)?.teamId)
             .map(p => p.puuid))
         .flat() ?? []
-    //check if any of the allies appears more than once
-    const has_duo = allies.find(a => allies.filter(b => a == b).length > 1)
+    //check if any of the allies appears more than twice
+    const has_duo = allies.find(a => allies.filter(b => a == b).length > 2)
     if(has_duo)
     {
         const duo = suspiciousSummoner?.data?.recentMatches.find(m => m.info.participants.find(p => p.puuid == has_duo))?.info.participants.find(p => p.puuid == has_duo)
@@ -110,8 +120,11 @@ export default function SummonerDetails()
     }
     else
         smurfChecks.push({smurf: false, text: `Player does not duo queue with another low-level player.`})
+
+    //show the positive checks first
     smurfChecks.sort((a,b) => a.smurf ? -1 : 1)
 
+    //map to components
     const smurfElems = smurfChecks.map(check => <SmurfIndicator indicator={check} />)
 
     return (
@@ -120,15 +133,15 @@ export default function SummonerDetails()
             <div className="container flex-col-center">
                 <h1>Smurf Check</h1>
                 <h2>Summoner Details: {suspiciousSummoner?.summoner.summonerName} (Level {suspiciousSummoner?.summoner.summonerLevel})</h2>
-                <h3>Stats</h3>
+                <h2>Stats</h2>
                 <div className="statsBox">
-                    <p><strong>Average K/D/A:</strong> {(stats.kills/match_length).toFixed(1)}/{(stats.deaths/match_length).toFixed(1)}/{(stats.assists/match_length).toFixed(1)}</p>
-                    <p><strong>Recent Winrate:</strong> {Math.round(stats.wins/(suspiciousSummoner?.data?.recentMatches.length ?? 1)*100)}%</p>
-                    <p><strong>Average Pings per Game:</strong> {pings_per_game}</p>
+                    <p className="statsEntry"><strong>Average K/D/A:</strong> {(stats.kills/match_count).toFixed(1)}/{(stats.deaths/match_count).toFixed(1)}/{(stats.assists/match_count).toFixed(1)}</p>
+                    <p className="statsEntry"><strong>Recent Winrate:</strong> {Math.round(stats.wins/(suspiciousSummoner?.data?.recentMatches.length ?? 1)*100)}%</p>
+                    <p className="statsEntry"><strong>Average Pings per Game:</strong> {pings_per_game}</p>
                 </div>
-                <h3>Smurf Check</h3>
-                <p className="textBox">Is this player a smurf or just really gifted at the videogame?
-                    Here are some possible indicators.</p>
+                <h2>Smurf Check</h2>
+                <p className="infoParagraph"><strong>Is this player a smurf or just really gifted at the videogame?
+                    Here are some possible indicators.</strong></p>
                 <div className="smurfChecks">
                     {smurfElems}
                 </div>

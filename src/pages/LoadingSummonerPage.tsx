@@ -10,7 +10,6 @@ export default function LoadingSummonerPage()
     const [loading, setLoading] = useState<number[]>([0,0,0]);
     const navigate = useNavigate();
     const {suspiciousSummoners, setSuspiciousSummoners} = useContext(AppContext);
-
     const { puuid } = useParams<{puuid: string}>();
 
     const summoner = suspiciousSummoners.find(s => s.summoner.puuid === puuid)
@@ -41,6 +40,7 @@ export default function LoadingSummonerPage()
             navigate('/summoner-details/' + puuid)
         }
         getPlayerMatches().catch((e) => console.log(e))
+
     }, [])
 
     return (

@@ -1,0 +1,32 @@
+.recentMatch {
+  background-color: #333;
+  width: 300px;
+  min-height: 60px;
+  border-radius: 5px;
+  margin: 0 auto;
+  padding-block: 1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
+
+.matchLoss {
+  border: 2px solid #290000;
+}
+
+.matchWin {
+    border: 2px solid #002900;
+}
+
+.winLossIndicator {
+  position:absolute;
+  left:10px;
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  cursor: default;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+}
