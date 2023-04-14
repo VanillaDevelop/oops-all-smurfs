@@ -1,7 +1,6 @@
 import './KeyPage.scss';
 import React, {useState} from "react";
 import {ipcRenderer} from "electron";
-import {testApiKey} from "../../electron/electron_utils/apiCalls";
 import {useNavigate} from "react-router-dom";
 import Warning from "@/components/Warning";
 

@@ -29,7 +29,6 @@ export default function SummonerDetails()
     //this shouldn't happen in the electron app, but resolves type errors
     if(!puuid) {
         navigate("/select-summoners");
-        return;
     }
 
     for (let i = 0; i < match_count; i++)
@@ -52,7 +51,7 @@ export default function SummonerDetails()
     }
 
     const recentMatches = suspiciousSummoner?.data?.recentMatches.map(
-        m => <RecentMatch match={m} summoner_id={puuid} />)
+        m => <RecentMatch match={m} summoner_id={puuid!} key={m.metadata.matchId + puuid} />)
 
     const winrate = Math.round(stats.wins/match_count*100)
     const pings_per_game = Math.round((stats.pings_w + stats.pings_l)/match_count)
@@ -69,7 +68,7 @@ export default function SummonerDetails()
     if ((suspiciousSummoner?.summoner.summonerLevel ?? 30) < 40)
         smurfChecks.push({smurf: true, text:`Player has a very low level (${suspiciousSummoner?.summoner.summonerLevel}).`})
     else
-        smurfChecks.push({smurf: false, text: `Player's level is reasonable. (${suspiciousSummoner?.summoner.summonerLevel}).`})
+        smurfChecks.push({smurf: false, text: `Player's level is low, but not extremely low (${suspiciousSummoner?.summoner.summonerLevel} >= 40).`})
 
     //Check if the player uses many pings
     if (pings_per_game > 10)
@@ -100,7 +99,7 @@ export default function SummonerDetails()
     //check if player has bot games on his match history
     const bot_games = suspiciousSummoner?.data?.recentMatches.filter(m => m.info.queueId >= 830 && m.info.queueId <= 850).length ?? 0
     if (bot_games > 0)
-        smurfChecks.push({smurf: true, text: `Player has played ${bot_games} bot games recently.`})
+        smurfChecks.push({smurf: true, text: `Player has played ${bot_games} bot game${bot_games != 1 ? "s" : ""} recently.`})
     else
         smurfChecks.push({smurf: false, text: `Player has not played any bot games.`})
 
@@ -122,7 +121,7 @@ export default function SummonerDetails()
         smurfChecks.push({smurf: false, text: `Player does not duo queue with another low-level player.`})
 
     //show the positive checks first
-    smurfChecks.sort((a,b) => a.smurf ? -1 : 1)
+    smurfChecks.sort((a, b) => a.smurf ? -1 : 1)
 
     //map to components
     const smurfElems = smurfChecks.map(check => <SmurfIndicator indicator={check} key={check.text} />)
@@ -130,7 +129,7 @@ export default function SummonerDetails()
     return (
         <div>
             <BackButton onClick={() => navigate("/select-summoners")}/>
-            <div className="container flex-col-center">
+            <div className="container flex-col-center pb-3">
                 <h1>Smurf Check</h1>
                 <h2>Summoner Details: {suspiciousSummoner?.summoner.summonerName} (Level {suspiciousSummoner?.summoner.summonerLevel})</h2>
                 <h2>Stats</h2>
